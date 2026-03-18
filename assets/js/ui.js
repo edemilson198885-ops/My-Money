@@ -127,11 +127,14 @@ MM.ui = {
     function item(screen, icon, textLabel){
       return `<button class="mm-bottom-item ${current===screen?'active':''}" data-go="${screen}"><span class="mm-bottom-icon">${icon}</span><span class="mm-bottom-text">${textLabel}</span></button>`;
     }
+    function toggleItem(icon, textLabel){
+      return `<button class="mm-bottom-item" data-toggle-sidebar="1"><span class="mm-bottom-icon">${icon}</span><span class="mm-bottom-text">${textLabel}</span></button>`;
+    }
     nav.innerHTML = `<div class="mm-bottom-nav-wrap">
       ${item(MM.config.SCREENS.DASHBOARD,'⌂','Painel')}
       ${item(MM.config.SCREENS.MOVEMENTS,'≣','Movimentos')}
       ${item(MM.config.SCREENS.CLOSING,'✓','Fechar')}
-      ${item(MM.config.SCREENS.SETTINGS,'☰','Menu')}
+      ${toggleItem('☰','Menu')}
     </div>`;
   },
   renderSelectOptions: function(options, selected){

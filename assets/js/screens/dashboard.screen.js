@@ -36,11 +36,15 @@ MM.dashboardScreen = {
       </div>`;
     }).join('') : `<div class="mm-chart-empty">Sem histórico suficiente ainda.</div>`;
 
+    var donutTotal = Number(m.entradas || 0) + Number(m.saidas || 0);
+    var inPctDonut = donutTotal > 0 ? Math.round((Number(m.entradas || 0) / donutTotal) * 100) : 50;
+    var donutStyle = `background:conic-gradient(#28b67a 0 ${inPctDonut}%, #7c3aed ${inPctDonut}% 100%)`;
+
     var shortcutHtml = `
       <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.ENTRY_EXTRA}"><span class="mm-shortcut-icon">＋</span><span class="mm-shortcut-text">Entrada+</span></button>
       <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.EXTRA}"><span class="mm-shortcut-icon">－</span><span class="mm-shortcut-text">Despesa</span></button>
       <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.CLOSING}"><span class="mm-shortcut-icon">✓</span><span class="mm-shortcut-text">Fechar</span></button>
-      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.SETTINGS}"><span class="mm-shortcut-icon">⋯</span><span class="mm-shortcut-text">Mais</span></button>
+      <button class="mm-shortcut-item" data-toggle-sidebar="1"><span class="mm-shortcut-icon">☰</span><span class="mm-shortcut-text">Menu</span></button>
     `;
 
     var mobileDashboard = `
@@ -57,17 +61,27 @@ MM.dashboardScreen = {
 
         <section class="mm-shortcuts-grid">${shortcutHtml}</section>
 
-        <section class="mm-status-grid-mobile">
-          <article class="mm-status-card"><div class="mm-status-label">A vencer</div><div class="mm-status-value">${m.dueSoon}</div></article>
-          <article class="mm-status-card"><div class="mm-status-label">Atrasadas</div><div class="mm-status-value">${m.overdue}</div></article>
-          <article class="mm-status-card"><div class="mm-status-label">Saldo anterior</div><div class="mm-status-value">${MM.helpers.formatCurrency(m.saldoAnterior)}</div></article>
-          <article class="mm-status-card"><div class="mm-status-label">Investimentos</div><div class="mm-status-value">${MM.helpers.formatCurrency(0)}</div></article>
+        <section class="mm-status-grid-mobile compact-grid">
+          <article class="mm-status-card compact"><div class="mm-status-label">A vencer</div><div class="mm-status-value">${m.dueSoon}</div></article>
+          <article class="mm-status-card compact"><div class="mm-status-label">Atrasadas</div><div class="mm-status-value">${m.overdue}</div></article>
+          <article class="mm-status-card compact"><div class="mm-status-label">Saldo anterior</div><div class="mm-status-value">${MM.helpers.formatCurrency(m.saldoAnterior)}</div></article>
+          <article class="mm-status-card compact"><div class="mm-status-label">Investimentos</div><div class="mm-status-value">${MM.helpers.formatCurrency(0)}</div></article>
         </section>
 
-        <section class="panel section mm-chart-card-mobile">
-          <div class="mm-card-header-mobile"><h3>Fluxo do mês</h3><p>Últimos meses</p></div>
-          <div class="mm-chart-legend-mobile"><span><i class="legend-dot entradas"></i>Entradas</span><span><i class="legend-dot saidas"></i>Saídas</span></div>
-          <div class="mm-chart-area-mobile">${chartHtml}</div>
+        <section class="panel section mm-chart-card-mobile mm-chart-card-donut">
+          <div class="mm-card-header-mobile"><h3>Fluxo do mês</h3><p>Entradas x saídas</p></div>
+          <div class="mm-chart-donut-wrap">
+            <div class="mm-donut" style="${donutStyle}">
+              <div class="mm-donut-hole">
+                <div class="mm-donut-center-label">Saldo</div>
+                <div class="mm-donut-center-value">${MM.helpers.formatCurrency(m.saldo)}</div>
+              </div>
+            </div>
+            <div class="mm-donut-legend">
+              <div><i class="legend-dot entradas"></i>Entradas <strong>${MM.helpers.formatCurrency(m.entradas)}</strong></div>
+              <div><i class="legend-dot saidas"></i>Saídas <strong>${MM.helpers.formatCurrency(m.saidas)}</strong></div>
+            </div>
+          </div>
         </section>
 
         <section class="panel section mm-user-card-mobile">
