@@ -11,7 +11,7 @@ MM.dashboardScreen = {
           <strong>${item.user.name}</strong>
           <span class="user-balance-value ${toneClass}">${MM.helpers.formatCurrency(item.total)}</span>
         </div>
-        <div class="muted user-balance-meta">Renda ${MM.helpers.formatCurrency(item.income)} • Gastos ${MM.helpers.formatCurrency(item.expense)}</div>
+        <div class="muted user-balance-meta">${MM.helpers.formatCurrency(item.income)} renda • ${MM.helpers.formatCurrency(item.expense)} gastos</div>
       </button>`;
     }).join('');
 
@@ -85,7 +85,7 @@ MM.dashboardScreen = {
         </section>
 
         <section class="panel section mm-user-card-mobile">
-          <div class="mm-card-header-mobile"><h3>Saldo por usuário</h3><p>Visão individual</p></div>
+          <div class="mm-card-header-mobile"><h3>Saldo por usuário</h3><p>Resumo individual</p></div>
           <div class="item-list">${balanceList || '<div class="muted">Cadastre usuários para visualizar o saldo individual.</div>'}</div>
         </section>
       </section>`;
