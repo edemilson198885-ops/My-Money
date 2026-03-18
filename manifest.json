@@ -1,0 +1,22 @@
+[
+  "assets/css/app.css",
+  "assets/js/app.js",
+  "assets/js/config.js",
+  "assets/js/events.js",
+  "assets/js/helpers.js",
+  "assets/js/models.js",
+  "assets/js/router.js",
+  "assets/js/screens/closing.screen.js",
+  "assets/js/screens/dashboard.screen.js",
+  "assets/js/screens/entry.screen.js",
+  "assets/js/screens/exit.screen.js",
+  "assets/js/screens/movements.screen.js",
+  "assets/js/screens/settings.screen.js",
+  "assets/js/screens/setup.screen.js",
+  "assets/js/screens/templates.screen.js",
+  "assets/js/services.js",
+  "assets/js/state.js",
+  "assets/js/storage.js",
+  "assets/js/ui.js",
+  "index.html"
+]
