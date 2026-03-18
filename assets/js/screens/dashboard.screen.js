@@ -43,8 +43,8 @@ MM.dashboardScreen = {
     var shortcutHtml = `
       <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.ENTRY_EXTRA}"><span class="mm-shortcut-icon">＋</span><span class="mm-shortcut-text">Entrada+</span></button>
       <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.EXTRA}"><span class="mm-shortcut-icon">－</span><span class="mm-shortcut-text">Despesa</span></button>
-      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.CLOSING}"><span class="mm-shortcut-icon">✓</span><span class="mm-shortcut-text">Fechar</span></button>
-      <button class="mm-shortcut-item" data-toggle-sidebar="1"><span class="mm-shortcut-icon">☰</span><span class="mm-shortcut-text">Menu</span></button>
+      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.TEMPLATES}"><span class="mm-shortcut-icon">▣</span><span class="mm-shortcut-text">Fixos</span></button>
+      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.SETTINGS}"><span class="mm-shortcut-icon">⚙</span><span class="mm-shortcut-text">Ajustes</span></button>
     `;
 
     var mobileDashboard = `
