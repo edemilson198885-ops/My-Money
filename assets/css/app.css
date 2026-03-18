@@ -475,3 +475,96 @@ input:focus,select:focus,textarea:focus{border-color:#c9b3ff;box-shadow:0 0 0 4p
   .mm-user-card-mobile .user-balance-head{align-items:flex-start;gap:6px;flex-direction:column}
   .mm-user-card-mobile .user-balance-value{font-size:1.2rem}
 }
+
+
+/* v6 professional mobile architecture */
+@media (max-width:980px){
+  body.sidebar-open{overflow:hidden}
+  #sidebar{z-index:62;width:min(74vw,286px);padding:14px 10px 110px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .sidebar-backdrop{z-index:58;background:rgba(17,10,37,.48)}
+  #bottom-nav{transition:opacity .2s ease,transform .2s ease}
+  body.sidebar-open #bottom-nav{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(20px)}
+  .sidebar-brand{padding:12px 12px 14px;border-radius:20px}
+  .brand-name{font-size:1.5rem;line-height:1.02}
+  .brand-version{font-size:.84rem}
+  .sidebar-nav{gap:4px;padding-bottom:8px}
+  .nav-btn{padding:10px 10px;border-radius:18px}
+  .nav-icon{width:40px;height:40px}
+  .nav-title{font-size:.95rem}
+  .sidebar-footer{display:none}
+
+  #main-content{padding:10px 10px 98px}
+  #screen-container{overflow-x:hidden}
+  .panel.section{padding:14px!important;border-radius:24px}
+  .topbar-mobile-compact{padding:12px 14px!important}
+  .topbar-brand-row{gap:8px}
+  .topbar-brand-mark{width:36px;height:36px;border-radius:12px}
+  .topbar-brand-title{font-size:.92rem}
+  .topbar-brand-version{font-size:.74rem}
+  .topbar-house-chip{padding:6px 10px;font-size:.76rem}
+  .topbar-meta-line{font-size:.84rem;margin-top:8px}
+  .topbar-controls-row{margin-top:10px;gap:6px}
+  .topbar-month-input{height:44px;border-radius:14px}
+  .topbar-saved-text{font-size:.76rem}
+
+  .mm-mobile-dashboard{gap:12px;padding-bottom:90px}
+  .mm-hero-card-mobile{padding:16px 16px 14px;border-radius:26px}
+  .mm-hero-value-mobile{font-size:2.45rem}
+  .mm-hero-meta-mobile{font-size:.92rem;line-height:1.25}
+  .mm-hero-actions-mobile{gap:10px;margin-top:14px}
+  .mm-main-action{height:48px;border-radius:16px;font-size:.98rem}
+
+  .mm-shortcuts-grid{gap:8px}
+  .mm-shortcut-item{min-width:0}
+  .mm-shortcut-icon{width:48px;height:48px;border-radius:16px;margin-bottom:6px}
+  .mm-shortcut-text{font-size:.68rem}
+
+  .mm-status-grid-mobile.compact-grid{gap:10px}
+  .mm-status-card.compact{min-height:84px;padding:12px 12px 10px;border-radius:18px}
+  .mm-status-card.compact .mm-status-label{font-size:.82rem;line-height:1.15}
+  .mm-status-card.compact .mm-status-value{margin-top:6px;font-size:1rem;line-height:1.15}
+
+  .mm-chart-card-donut{padding:14px!important}
+  .mm-chart-donut-wrap{grid-template-columns:92px 1fr;gap:12px;margin-top:6px}
+  .mm-donut{width:92px;height:92px}
+  .mm-donut-hole{inset:12px}
+  .mm-donut-center-label{font-size:.66rem}
+  .mm-donut-center-value{font-size:.72rem}
+  .mm-donut-legend{gap:8px;font-size:.82rem}
+  .mm-donut-legend strong{font-size:.84rem}
+
+  .mm-user-card-mobile .item-list{gap:10px}
+  .mm-user-card-mobile .item{padding:12px;border-radius:16px}
+  .mm-user-card-mobile .user-balance-head{display:flex!important;flex-direction:row!important;justify-content:space-between;align-items:flex-start;gap:8px}
+  .mm-user-card-mobile .user-balance-head strong{font-size:.98rem}
+  .mm-user-card-mobile .user-balance-value{font-size:1.08rem;line-height:1.1}
+  .mm-user-card-mobile .user-balance-meta{font-size:.78rem;line-height:1.22;margin-top:4px}
+
+  .mm-bottom-nav-wrap{padding:7px 7px 8px;border-radius:20px;gap:4px}
+  .mm-bottom-item{padding:6px 2px;border-radius:14px}
+  .mm-bottom-icon{font-size:1rem;margin-bottom:2px}
+  .mm-bottom-text{font-size:.66rem}
+
+  .toolbar{display:grid;grid-template-columns:1fr;gap:10px}
+  .toolbar > *{min-width:0;width:100%}
+  .settings-grid{grid-template-columns:1fr}
+  .actions-inline{display:grid;grid-template-columns:1fr;gap:10px}
+  .user-row{gap:10px}
+  .feedback{font-size:.84rem}
+  .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .metric{padding:12px;min-height:84px;border-radius:18px}
+  .metric .muted{font-size:.82rem;line-height:1.12}
+  .metric .value,.metric-mini-value{font-size:1.02rem!important;line-height:1.15;margin-top:6px}
+  .movement-list{display:grid;gap:10px}
+  .movement-card{border-radius:18px}
+  .movement-card-head{padding:12px 12px 10px}
+  .movement-card-title{font-size:.98rem}
+  .movement-card-meta,.movement-card-value{font-size:.84rem}
+  .movement-card-body{padding:12px}
+}
+
+@media (max-width:420px){
+  .mm-status-card.compact .mm-status-value{font-size:.95rem}
+  .metric-grid{grid-template-columns:1fr 1fr}
+  .metric .value,.metric-mini-value{font-size:.96rem!important}
+}
