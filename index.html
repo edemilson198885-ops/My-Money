@@ -10,20 +10,16 @@
   <title>My Money</title>
   <link rel="manifest" href="./manifest.json?v=1.0.5" />
   <script>
-  window.APP_VERSION = "1.0.6";
-  (function () {
-    var storedVersion = localStorage.getItem('mm_app_version');
-    var reloadedForVersion = sessionStorage.getItem('mm_reloaded_version');
-
-    if (storedVersion !== window.APP_VERSION) {
-      localStorage.setItem('mm_app_version', window.APP_VERSION);
-
-      if (storedVersion && reloadedForVersion !== window.APP_VERSION) {
-        sessionStorage.setItem('mm_reloaded_version', window.APP_VERSION);
-        location.reload();
+    window.APP_VERSION = "1.0.5";
+    (function () {
+      var storedVersion = localStorage.getItem('mm_app_version');
+      if (storedVersion !== window.APP_VERSION) {
+        localStorage.setItem('mm_app_version', window.APP_VERSION);
+        if (storedVersion) {
+          setTimeout(function () { location.reload(); }, 60);
+        }
       }
-    }
-  })();
+    })();
   </script>
   <link rel="stylesheet" href="./assets/css/app.css?v=1.0.5" />
 </head>
