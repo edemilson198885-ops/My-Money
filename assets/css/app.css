@@ -221,27 +221,66 @@ input:focus,select:focus,textarea:focus{border-color:#c9b3ff;box-shadow:0 0 0 4p
 @media (max-width:980px){.hero-balance-row,.dashboard-middle-grid,.metric-grid-compact{grid-template-columns:1fr}.flow-chart{grid-template-columns:repeat(3,minmax(72px,1fr))}}
 
 
-.dashboard-shell-clean{gap:16px}
-.hero-card-clean{padding:18px 20px}
-.hero-top-clean{margin-bottom:0}
-.dashboard-quick-actions .btn{border-radius:16px;padding:10px 14px}
-.metric-grid-clean{grid-template-columns:repeat(5,minmax(120px,1fr));gap:12px}
-.dashboard-middle-grid-clean{grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:16px}
-.chart-panel-clean{min-height:auto}
-.flow-chart-clean{height:220px;grid-template-columns:repeat(auto-fit,minmax(74px,1fr));gap:12px}
-.compact-flow-group{gap:8px}
-.compact-flow-bars{height:150px}
-.flow-values{display:grid;gap:2px;text-align:center;font-size:.76rem;font-weight:700;color:var(--muted)}
-.single-summary-panel{background:linear-gradient(180deg,#fcfbff 0%,#f7f3ff 100%)}
-.compact-balance-list{gap:12px}
-.user-balance-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
-.user-balance-pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:.74rem;font-weight:700;border:1px solid transparent}
-.user-balance-pill.positive{background:#dcfce7;color:#166534;border-color:#bbf7d0}
-.user-balance-pill.negative{background:#fee2e2;color:#b91c1c;border-color:#fecaca}
-.user-balance-pill.neutral{background:#efe7ff;color:#6f2cff;border-color:#dccbff}
-.balance-user-link .muted{margin-top:4px}
-.total-balance-card{display:grid;gap:8px}
+#topbar{margin-bottom:18px}
+#topbar .panel{border-radius:20px}
+#topbar .section{padding:18px 20px}
+#topbar .row > .row:last-child{gap:12px}
+
+.hero-actions{justify-content:flex-end}
+.hero-actions .btn{min-width:140px}
+.flow-chart-wrap{overflow-x:auto;padding-bottom:4px}
+
 @media (max-width:980px){
-  .metric-grid-clean,.dashboard-middle-grid-clean{grid-template-columns:1fr}
-  .flow-chart-clean{grid-template-columns:repeat(3,minmax(72px,1fr))}
+  #topbar{margin-bottom:14px}
+  #topbar .section{padding:14px}
+  #topbar .row{display:grid;grid-template-columns:1fr;align-items:stretch}
+  #topbar .row > .row{width:100%}
+  #topbar .row > .row:last-child{display:grid;grid-template-columns:1fr;justify-content:stretch}
+  #topbar #global-month{width:100%!important}
+  #topbar .muted{font-size:.88rem}
+
+  .hero-card-compact{padding:16px}
+  .hero-top{flex-direction:column;align-items:stretch;gap:14px}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+  .hero-actions .btn{width:100%;min-width:0;padding:12px 10px;font-size:.92rem}
+  .hero-value{font-size:1.7rem;line-height:1.1}
+  .hero-mini-grid-compact{display:grid;grid-template-columns:1fr;gap:10px}
+  .hero-mini-card{padding:12px 14px}
+
+  .metric-grid-compact{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .metric-card-small{min-height:84px;padding:12px 14px}
+  .metric-mini-value{font-size:1.02rem}
+
+  .dashboard-middle-grid,.summary-grid-3{grid-template-columns:1fr;gap:14px}
+  .chart-panel{min-height:0;padding:16px}
+  .panel-head-inline{gap:10px;margin-bottom:12px}
+  .chart-legend{font-size:.84rem;gap:10px}
+  .flow-chart{grid-template-columns:repeat(2,minmax(110px,1fr));gap:12px;height:auto;align-items:stretch}
+  .flow-group{min-width:0}
+  .flow-bars{height:150px;gap:10px}
+  .flow-bar{border-radius:16px 16px 10px 10px;min-height:18px}
+  .flow-bar span{font-size:.72rem;max-width:100px;overflow:hidden;text-overflow:ellipsis}
+  .flow-label{font-size:.82rem}
+
+  .summary-grid-3 .panel.section,.summary-grid .panel.section{padding:16px}
+  .item{padding:12px 14px}
+  .user-balance-value{font-size:1.08rem}
+}
+
+@media (max-width:640px){
+  #main-content{padding:12px}
+  .section{padding:16px}
+  .hero-actions{grid-template-columns:1fr}
+  .metric-grid-compact{grid-template-columns:1fr 1fr}
+  .flow-chart{grid-template-columns:1fr 1fr}
+  .quick-summary-item{padding:10px 12px}
+}
+
+@media (max-width:420px){
+  .metric-grid-compact{grid-template-columns:1fr}
+  .flow-chart{grid-template-columns:1fr}
+  .flow-bars{height:130px}
+  .hero-value{font-size:1.5rem}
+  .nav-btn .nav-subtitle{display:none}
+  .sidebar-footer{display:none}
 }
