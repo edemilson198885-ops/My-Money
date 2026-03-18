@@ -63,7 +63,7 @@ MM.ui = {
     if(sidebar) sidebar.style.display = '';
     this.setHTML('sidebar', `
       <div class="sidebar-brand">
-        <div class="brand-kicker">My Money</div>
+        <div class="brand-kicker">My Money <span class="brand-kicker-version">v${MM.config.APP_VERSION}</span></div>
         <div class="brand-name">Seu controle</div>
         <div class="brand-version">Financeiro simples e forte</div>
       </div>
@@ -95,18 +95,19 @@ MM.ui = {
     var house = MM.state.household.name;
     var saved = MM.state.ui.lastSavedAt ? new Date(MM.state.ui.lastSavedAt).toLocaleString('pt-BR') : 'Ainda não salvo';
     this.setHTML('topbar', `
-      <div class="panel section">
-        <div class="row">
-          <div class="row" style="justify-content:flex-start;gap:12px">
-            <button class="mobile-menu-btn" type="button" data-toggle-sidebar="1" aria-label="Abrir menu">
-              <svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
-            </button>
-            <div><strong>${house}</strong><div class="muted">Competência: ${MM.state.currentMonth}</div></div>
+      <div class="panel section topbar-mobile-compact">
+        <div class="topbar-brand-row">
+          <div class="topbar-brand-mark">MM</div>
+          <div class="topbar-brand-copy">
+            <div class="topbar-brand-title">${MM.config.APP_NAME}</div>
+            <div class="topbar-brand-version">v${MM.config.APP_VERSION}</div>
           </div>
-          <div class="row">
-            <input id="global-month" type="month" value="${MM.state.currentMonth}" style="width:auto" />
-            <div class="muted">Último salvamento: ${saved}</div>
-          </div>
+          <div class="topbar-house-chip">${house}</div>
+        </div>
+        <div class="topbar-meta-line">Competência ${MM.state.currentMonth}</div>
+        <div class="topbar-controls-row">
+          <input id="global-month" type="month" value="${MM.state.currentMonth}" class="topbar-month-input" />
+          <div class="topbar-saved-text">Atualizado ${saved}</div>
         </div>
       </div>
     `);

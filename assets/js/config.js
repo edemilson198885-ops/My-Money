@@ -1,7 +1,7 @@
 window.MM = window.MM || {};
 MM.config = {
   APP_NAME: 'My Money',
-  APP_VERSION: '1.0.6',
+  APP_VERSION: '1.0.8',
   MAX_USERS: 10,
   STORAGE_KEYS: {
     config: 'mm_core_config',

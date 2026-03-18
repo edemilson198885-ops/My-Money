@@ -11,7 +11,7 @@ MM.dashboardScreen = {
           <strong>${item.user.name}</strong>
           <span class="user-balance-value ${toneClass}">${MM.helpers.formatCurrency(item.total)}</span>
         </div>
-        <div class="muted">Renda ${MM.helpers.formatCurrency(item.income)} • Gastos ${MM.helpers.formatCurrency(item.expense)}</div>
+        <div class="muted user-balance-meta">Renda ${MM.helpers.formatCurrency(item.income)} • Gastos ${MM.helpers.formatCurrency(item.expense)}</div>
       </button>`;
     }).join('');
 
@@ -34,12 +34,12 @@ MM.dashboardScreen = {
         </div>
         <div class="mm-chart-label">${label}</div>
       </div>`;
-    }).join('') : `<div class="mm-chart-empty">Adicione mais meses para visualizar a evolução.</div>`;
+    }).join('') : `<div class="mm-chart-empty">Sem histórico suficiente ainda.</div>`;
 
     var shortcutHtml = `
-      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.ENTRY_EXTRA}"><span class="mm-shortcut-icon">＋</span><span class="mm-shortcut-text">Entrada extra</span></button>
-      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.EXTRA}"><span class="mm-shortcut-icon">－</span><span class="mm-shortcut-text">Despesa extra</span></button>
-      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.CLOSING}"><span class="mm-shortcut-icon">✓</span><span class="mm-shortcut-text">Fechamento</span></button>
+      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.ENTRY_EXTRA}"><span class="mm-shortcut-icon">＋</span><span class="mm-shortcut-text">Entrada+</span></button>
+      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.EXTRA}"><span class="mm-shortcut-icon">－</span><span class="mm-shortcut-text">Despesa</span></button>
+      <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.CLOSING}"><span class="mm-shortcut-icon">✓</span><span class="mm-shortcut-text">Fechar</span></button>
       <button class="mm-shortcut-item" data-go="${MM.config.SCREENS.SETTINGS}"><span class="mm-shortcut-icon">⋯</span><span class="mm-shortcut-text">Mais</span></button>
     `;
 
@@ -50,8 +50,8 @@ MM.dashboardScreen = {
           <div class="mm-hero-value-mobile">${MM.helpers.formatCurrency(m.saldo)}</div>
           <div class="mm-hero-meta-mobile">Entradas ${MM.helpers.formatCurrency(m.entradas)} • Saídas ${MM.helpers.formatCurrency(m.saidas)}</div>
           <div class="mm-hero-actions-mobile">
-            <button class="mm-main-action" id="dashboard-new-entry" type="button">+ Entrada</button>
-            <button class="mm-main-action alt" id="dashboard-new-exit" type="button">+ Saída</button>
+            <button class="mm-main-action" id="dashboard-new-entry" type="button"><span class="mm-main-action-icon">＋</span><span>Entrada</span></button>
+            <button class="mm-main-action alt" id="dashboard-new-exit" type="button"><span class="mm-main-action-icon">－</span><span>Saída</span></button>
           </div>
         </section>
 
