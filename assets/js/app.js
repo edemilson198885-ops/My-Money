@@ -33,6 +33,7 @@ MM.app = {
     }
     MM.ui.renderSidebar();
     MM.ui.renderTopbar();
+    MM.ui.renderBottomNav();
     MM.router.renderCurrent();
     MM.ui.animateScreen();
   },

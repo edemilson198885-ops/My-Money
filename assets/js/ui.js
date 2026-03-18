@@ -115,6 +115,24 @@ MM.ui = {
       MM.app.render();
     };
   },
+
+  renderBottomNav: function(){
+    var hasHousehold = !!MM.state.household;
+    var nav = document.getElementById('bottom-nav');
+    if(!nav){ return; }
+    if(!hasHousehold){ nav.innerHTML = ''; nav.style.display = 'none'; return; }
+    nav.style.display = '';
+    var current = MM.state.currentScreen;
+    function item(screen, icon, textLabel){
+      return `<button class="mm-bottom-item ${current===screen?'active':''}" data-go="${screen}"><span class="mm-bottom-icon">${icon}</span><span class="mm-bottom-text">${textLabel}</span></button>`;
+    }
+    nav.innerHTML = `<div class="mm-bottom-nav-wrap">
+      ${item(MM.config.SCREENS.DASHBOARD,'⌂','Painel')}
+      ${item(MM.config.SCREENS.MOVEMENTS,'≣','Movimentos')}
+      ${item(MM.config.SCREENS.CLOSING,'✓','Fechar')}
+      ${item(MM.config.SCREENS.SETTINGS,'☰','Menu')}
+    </div>`;
+  },
   renderSelectOptions: function(options, selected){
     return options.map(function(opt){ return `<option value="${opt.value}" ${String(selected)===String(opt.value)?'selected':''}>${opt.label}</option>`; }).join('');
   },
