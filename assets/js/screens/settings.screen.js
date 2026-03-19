@@ -43,7 +43,9 @@ MM.settingsScreen = {
             <div class="panel section settings-section">
               <h3 style="margin-top:0">Sistema</h3>
               <div class="actions-inline">
-                <button class="btn danger" id="reset-local-btn" type="button">Limpar dados locais</button>
+                <button class="btn secondary" id="settings-refresh-btn" type="button">Baixar da nuvem</button>
+                <button class="btn primary" id="settings-sync-btn" type="button">Sincronizar agora</button>
+                <button class="btn danger" id="reset-local-btn" type="button">Sair desta conta</button>
               </div>
             </div>
           </div>
@@ -73,7 +75,7 @@ MM.settingsScreen = {
       MM.settingsScreen.render();
     };
 
-    document.getElementById('save-settings-btn').onclick = function(){
+    document.getElementById('save-settings-btn').onclick = async function(){
       try{
         var newHouseName = document.getElementById('settings-household-name').value.trim();
         var updatedUsers = MM.state.users.map(function(u){
@@ -84,11 +86,31 @@ MM.settingsScreen = {
         MM.services.validateUsersForSettings(updatedUsers);
         MM.state.household.name = newHouseName || MM.state.household.name;
         MM.state.users = updatedUsers;
-        MM.storage.syncFromState();
+        await MM.sync.syncNow();
         MM.app.render();
         MM.ui.showFeedback('settings-feedback', 'Configurações salvas com sucesso.', 'info');
       }catch(err){
         MM.ui.showFeedback('settings-feedback', err.message || 'Erro ao salvar configurações.', 'error');
+      }
+    };
+
+    document.getElementById('settings-sync-btn').onclick = async function(){
+      try{
+        await MM.sync.syncNow();
+        MM.app.render();
+        MM.ui.showFeedback('settings-feedback', 'Dados enviados para a nuvem.', 'info');
+      }catch(err){
+        MM.ui.showFeedback('settings-feedback', err.message || 'Erro ao sincronizar.', 'error');
+      }
+    };
+
+    document.getElementById('settings-refresh-btn').onclick = async function(){
+      try{
+        await MM.sync.refreshFromCloud();
+        MM.app.render();
+        MM.ui.showFeedback('settings-feedback', 'Dados baixados da nuvem.', 'info');
+      }catch(err){
+        MM.ui.showFeedback('settings-feedback', err.message || 'Erro ao atualizar da nuvem.', 'error');
       }
     };
 
@@ -117,9 +139,9 @@ MM.settingsScreen = {
       e.target.value = '';
     };
 
-    document.getElementById('reset-local-btn').onclick = function(){
-      if(!confirm('Tem certeza que deseja apagar todos os dados locais?')) return;
-      MM.storage.resetLocalData();
+    document.getElementById('reset-local-btn').onclick = async function(){
+      if(!confirm('Tem certeza que deseja sair da conta neste dispositivo?')) return;
+      await MM.storage.resetLocalData();
       MM.stateApi.initialize();
       MM.setupScreen.resetTemp();
       MM.app.render();

@@ -63,9 +63,10 @@ MM.ui = {
     if(sidebar) sidebar.style.display = '';
     this.setHTML('sidebar', `
       <div class="sidebar-brand">
-        <div class="brand-kicker">My Money <span class="brand-kicker-version">v${MM.config.APP_VERSION}</span></div>
+        <div class="sidebar-brand-logo-wrap"><img src="./assets/logo-home-rs.png" alt="Residência Financeira" class="sidebar-brand-logo" /></div>
+        <div class="brand-kicker">Residência Financeira <span class="brand-kicker-version">v${MM.config.APP_VERSION}</span></div>
         <div class="brand-name">Seu controle</div>
-        <div class="brand-version">Financeiro simples e forte</div>
+        <div class="brand-version">Saldo, contas e família no mesmo lugar</div>
       </div>
       <nav class="sidebar-nav">
         ${this.navItem(current,'dashboard','Dashboard','Visão geral')}
@@ -94,12 +95,15 @@ MM.ui = {
     if(topbar) topbar.style.display = '';
     var house = MM.state.household.name;
     var saved = MM.state.ui.lastSavedAt ? new Date(MM.state.ui.lastSavedAt).toLocaleString('pt-BR') : 'Ainda não salvo';
+    var syncStatus = MM.state.ui.syncStatus || (navigator.onLine ? 'online' : 'offline');
+    var syncMessage = MM.state.ui.syncMessage || (navigator.onLine ? 'Online' : 'Offline');
+    var cloudTime = MM.state.ui.lastCloudSyncAt ? new Date(MM.state.ui.lastCloudSyncAt).toLocaleTimeString('pt-BR') : 'sem sync';
     this.setHTML('topbar', `
       <div class="panel section topbar-mobile-compact">
         <div class="topbar-brand-row">
-          <div class="topbar-brand-mark">MM</div>
+          <div class="topbar-brand-mark topbar-brand-mark-logo"><img src="./assets/logo-home-rs.png" alt="Residência Financeira" class="topbar-brand-logo" /></div>
           <div class="topbar-brand-copy">
-            <div class="topbar-brand-title">${MM.config.APP_NAME}</div>
+            <div class="topbar-brand-title topbar-brand-title-logo">Residência Financeira</div>
             <div class="topbar-brand-version">v${MM.config.APP_VERSION}</div>
           </div>
           <div class="topbar-house-chip">${house}</div>
@@ -107,7 +111,16 @@ MM.ui = {
         <div class="topbar-meta-line">Competência ${MM.state.currentMonth}</div>
         <div class="topbar-controls-row">
           <input id="global-month" type="month" value="${MM.state.currentMonth}" class="topbar-month-input" />
-          <div class="topbar-saved-text">Atualizado ${saved}</div>
+          <div class="cloud-sync-wrap">
+            <div class="cloud-sync-row">
+              <span id="cloud-sync-status" class="sync-pill ${syncStatus}">${syncMessage}</span>
+              <button class="btn secondary" id="cloud-refresh-btn" type="button">Baixar nuvem</button>
+              <button class="btn primary" id="cloud-sync-btn" type="button">Sincronizar</button>
+              <button class="btn danger" id="topbar-signout-btn" type="button">Sair</button>
+            </div>
+            <div id="cloud-sync-message" class="topbar-saved-text">${syncMessage} · ${cloudTime}</div>
+            <div class="topbar-saved-text">Atualizado ${saved}</div>
+          </div>
         </div>
       </div>
     `);
@@ -115,6 +128,50 @@ MM.ui = {
       MM.state.currentMonth = e.target.value || MM.helpers.currentMonth();
       MM.app.render();
     };
+    document.getElementById('cloud-sync-btn').onclick = async function(){
+      try {
+        await MM.sync.syncNow();
+        MM.ui.showToast('Dados enviados para a nuvem.', 'info');
+        MM.app.render();
+      } catch(err) {
+        MM.ui.showToast(err.message || 'Erro ao sincronizar.', 'error');
+      }
+    };
+    document.getElementById('cloud-refresh-btn').onclick = async function(){
+      try {
+        await MM.sync.refreshFromCloud();
+        MM.ui.showToast('Dados atualizados da nuvem.', 'info');
+        MM.app.render();
+      } catch(err) {
+        MM.ui.showToast(err.message || 'Erro ao baixar da nuvem.', 'error');
+      }
+    };
+    var signOutBtn = document.getElementById('topbar-signout-btn');
+    if(signOutBtn){
+      signOutBtn.onclick = async function(){
+        try {
+          await MM.auth.signOut();
+          MM.stateApi.initialize();
+          MM.app.render();
+          MM.ui.showToast('Sessão encerrada com sucesso.', 'info');
+        } catch(err) {
+          MM.ui.showToast(err.message || 'Erro ao sair da conta.', 'error');
+        }
+      };
+    }
+  },
+
+  renderCloudStatusOnly: function(){
+    var statusEl = document.getElementById('cloud-sync-status');
+    if (statusEl) {
+      statusEl.className = 'sync-pill ' + (MM.state.ui.syncStatus || 'offline');
+      statusEl.textContent = MM.state.ui.syncMessage || 'Offline';
+    }
+    var messageEl = document.getElementById('cloud-sync-message');
+    if (messageEl) {
+      var base = MM.state.ui.syncMessage || 'Offline';
+      messageEl.textContent = MM.state.ui.lastCloudSyncAt ? (base + ' · ' + new Date(MM.state.ui.lastCloudSyncAt).toLocaleTimeString('pt-BR')) : base;
+    }
   },
 
   renderBottomNav: function(){
